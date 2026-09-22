@@ -3,7 +3,7 @@
     Representação lógica das entidades e relacionamentos definindo os atributos, tipos de dados e chaves
 
 ## Elementos usados
-- Entidades (Task & User)
+- Entidades (Tabelas)
   - Representação das tabelas principais para o relacionamento entre ambas
 - Chaves identificadora
     - id -> Identificador único de cada registro da tabela. Seu valor não deve se repetir dentro daquela tabela, permitindo diferenciar cada registro.
@@ -12,9 +12,12 @@
         - Atributo **name** recebe os nome de cada usuário logado: Lavínia, Dôglas, Gleice, Dalmo...
 - Chaves estrangeiras (FK Foreign key)
     - Relaciona um(s) registro(s) de uma tabela a outra. **Exemplo:** Usuário se relaciona com Task, pois, um usuário pode criar varias tarefas e cada tarefa está relacionada a cada usuário.
+- Cardinalidades (1:N, 1:1)
+    - Representa o vínculo/relação de uma tabela com a outra. **Exemplo:**
+        - Uma Usuário pode ter muitas (1:N) tarefas, mas cada tarefa está relacionada apenas com um usuário (1:1)
 
 ## Tabelas criadas
-    Tabela user & task criadas para a representação das regras de negócios
+    Foram criadas 4 tabelas apartir do modelo conceitual para representar o modelo lógico e estrutural do banco de dados
 
 
 ### user
@@ -36,10 +39,29 @@
 #### Atributos
 | Campo | Tipo | Chave | Descrição |
 | ----- | ---- |  ---- |--------- |
-| id    | Integer| PK | Campo identificador da tabela task aceitando apenas entradas do tipo inteiro (número) |
+| id    | Integer| PK | Campo identificador da tabela task |
 | title | Varchar | - | Titulo referenciado a tarefa do tipo string(texto)|
 | description | Varchar | - | Descrição da tarefa, tipo texto |
-| created_date | Date | - | Data de criação da tarefa |
-| priority | Varchar | - | Prioridade da tarefa, Valores permitidos: Urgente, Alta, média e Baixa
-| status | Varchar | - | Status da tarefa Valores permitidos: Realizada, Não realizado e em andamento |
 | user_id | Integer | FK | Chave estrangeira que identifica o usuário responsável pela tarefa e referencia o id da tabela user.
+| priority_id | Integer | FK | Chave estrangeira que identica a prioridade da tarefa referenciada pelo identificador único da tabela prioridade(priorities) |
+| status_id | Integer | FK | Chave estrangeira que identifica a status da tarefa referenciada pelo idfentificador único da tabela status |
+
+### priorities
+    Representa a prioridade que é relacionada a uma ou varias tarefas
+
+#### Atributos
+| Campo | Tipo | Chave | Descrição |
+| ----- | ---- | ----- | --------- |
+| id | Integer | PK | Campo identificador da tabela de prioridades |
+| name | Varchar | - | Nome da prioridade (Alta, média, baixa) |
+
+### status
+    Representa a prioridade que é relacionada a uma ou varias tarefas
+
+#### Atributos
+| Campo | Tipo | Chave | Descrição |
+| ----- | ---- | ----- | --------- |
+| id | Integer | PK | Campo identificador da tabela status |
+| name | Varchar | - | Nome da prioridade (Pendente, Realizado) |
+
+
